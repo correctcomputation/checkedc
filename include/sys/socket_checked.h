@@ -24,14 +24,13 @@
 #pragma CHECKED_SCOPE push
 #pragma CHECKED_SCOPE on
 
-#ifdef __APPLE__
+#ifdef __APPLE__ || __linux__
 // Seems not to be a thing for Mac
 #define __THROW
 #define __CONST_SOCKADDR_ARG const struct sockaddr *
 #define __SOCKADDR_ARG struct sockaddr *__restrict
 #endif
 
-#ifndef _GNU_SOURCE
 
 extern int socketpair (int __domain, int __type, int __protocol, 
     int __fds[2] : itype(int _Checked[2])) __THROW;
@@ -135,7 +134,6 @@ extern int accept4 (
     int __flags);
 #endif
 
-#endif
 
 #pragma CHECKED_SCOPE pop
 
