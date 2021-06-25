@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------//
-// Bounds-safe interfaces for functions in POSIX socket.h.             //
-//                                                                     //
+// Bounds-safe interfaces for functions in POSIX socket.h.             // //
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
@@ -25,12 +24,20 @@
 #pragma CHECKED_SCOPE push
 #pragma CHECKED_SCOPE on
 
-#ifdef __APPLE__
-// Seems not to be a thing for Mac
-#define __THROW
+#ifndef __CONST_SOCKADDR_ARG
 #define __CONST_SOCKADDR_ARG const struct sockaddr *
+#endif
+
+#ifndef __SOCKADDR_ARG
 #define __SOCKADDR_ARG struct sockaddr *__restrict
 #endif
+
+
+#ifdef __APPLE__ 
+// Seems not to be a thing for Mac
+#define __THROW
+#endif
+
 
 extern int socketpair (int __domain, int __type, int __protocol, 
     int __fds[2] : itype(int _Checked[2])) __THROW;
@@ -133,6 +140,7 @@ extern int accept4 (
     socklen_t *__restrict __addr_len : itype(_Ptr<socklen_t> __restrict), 
     int __flags);
 #endif
+
 
 #pragma CHECKED_SCOPE pop
 
