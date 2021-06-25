@@ -24,11 +24,18 @@
 #pragma CHECKED_SCOPE push
 #pragma CHECKED_SCOPE on
 
-#ifdef __APPLE__ || __linux__
+#ifndef __CONST_SOCKADDR_ARG
+#define __CONST_SOCKADDR_ARG const struct sockaddr *
+#endif
+
+#ifndef __SOCKADDR_ARG
+#define __SOCKADDR_ARG struct sockaddr *__restrict
+#endif
+
+
+#ifdef __APPLE__ 
 // Seems not to be a thing for Mac
 #define __THROW
-#define __CONST_SOCKADDR_ARG const struct sockaddr *
-#define __SOCKADDR_ARG struct sockaddr *__restrict
 #endif
 
 
