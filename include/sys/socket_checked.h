@@ -1,6 +1,5 @@
 //---------------------------------------------------------------------//
-// Bounds-safe interfaces for functions in POSIX socket.h.             //
-//                                                                     //
+// Bounds-safe interfaces for functions in POSIX socket.h.             // //
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
@@ -31,6 +30,8 @@
 #define __CONST_SOCKADDR_ARG const struct sockaddr *
 #define __SOCKADDR_ARG struct sockaddr *__restrict
 #endif
+
+#ifndef _GNU_SOURCE
 
 extern int socketpair (int __domain, int __type, int __protocol, 
     int __fds[2] : itype(int _Checked[2])) __THROW;
@@ -132,6 +133,8 @@ extern int accept4 (
     __SOCKADDR_ARG __addr : itype(_Ptr<struct sockaddr> __restrict), 
     socklen_t *__restrict __addr_len : itype(_Ptr<socklen_t> __restrict), 
     int __flags);
+#endif
+
 #endif
 
 #pragma CHECKED_SCOPE pop
