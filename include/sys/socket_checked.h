@@ -42,11 +42,12 @@
 extern int socketpair (int __domain, int __type, int __protocol, 
     int __fds[2] : itype(int _Checked[2])) __THROW;
 
+/*
 extern int bind (
     int __fd, 
     __CONST_SOCKADDR_ARG __addr : itype(_Ptr<const struct sockaddr>), 
     socklen_t __len)
-     __THROW;
+     __THROW;*/
 
 extern int getsockname (
     int __fd, 
